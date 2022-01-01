@@ -18,9 +18,16 @@ export const createApplication = async (req, res) => {
 
     const newApplicant = new hostelApplicationModel({
         studentName: studentNameInStringFormat,
-        registrationNumber: registrationNumberInString
+        registrationNumber: registrationNumberInString,
+        hostelPreference:hostelPreferenceInString,
+        gender : genderInString
     });
+    const hostelPreference = req.body.hostelPreference;
+    const hostelPreferenceInString = hostelPreference.toString();
 
+    const gender = req.body.gender;
+    const genderInString = gender.toString();
+// 
     try {
         await newApplicant.save();
         res.json(newApplicant);

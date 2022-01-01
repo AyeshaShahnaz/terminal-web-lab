@@ -3,12 +3,13 @@ import { addApplicant } from "../Service/api";
 
 const AddApplicant = () => {
 
-    const [ applicantData, setApplicantData] = useState({
-        studentName: "",
-        registrationNumber: ""
-    })
+    const [applicantData, setApplicantData] = useState({
+      studentName: "",
+      registrationNumber: "",
+      hostelPreference:"",
+    });
 
-    const { studentName, registrationNumber } = applicantData;
+    const { studentName, registrationNumber, hostelPreference } = applicantData;
 
     const handleChannge = (e) => {
         setApplicantData( {...applicantData, [e.target.name]: [e.target.value] } )
@@ -18,7 +19,14 @@ const AddApplicant = () => {
       e.preventDefault();
       await addApplicant(applicantData);
     }
+const handleCheckbox = (e) => {
+  const isChecked = e.target.checked;
 
+    setApplicantData({
+      hostelPreference: [...applicantData.hostelPreference, e.target.value],
+    });
+   
+};
     return (
       <div className="col-md-6 position-absolute start-50 translate-middle-x mt-5">
         <form>
@@ -37,42 +45,74 @@ const AddApplicant = () => {
             name="registrationNumber"
             onChange={(e) => handleChannge(e)}
           />
-         
-
-          {/* <div className="mt-3">
-            <label class="form-label me-3">Preferred Date</label>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                name="pDate"
-                type="checkbox"
-                id="1"
-                value="22-11-2021"
-                checked={this.state.data.pDate === "22-11-2021"}
-                onChange={this.handleChange}
-              />
-              <label class="form-check-label" for="inlineCheckbox1">
-                22-11-2021
-              </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                name="pDate"
-                type="checkbox"
-                id="2"
-                value="25-11-2021"
-                checked={this.state.data.pDate === "25-11-2021"}
-                onChange={this.handleChange}
-              />
-              <label class="form-check-label" for="inlineCheckbox2">
-                25-11-2021
-              </label>
-            </div>
+          <label className="mb-2">Gender</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="exampleRadios"
+              id="exampleRadios1"
+              value="option1"
+              checked
+            ></input>
+            <label class="form-check-label" for="exampleRadios1">
+              Male
+            </label>
           </div>
-          {this.state.errors.pDate && (
-            <div className="alert alert-danger">{this.state.errors.pDate}</div>
-          )} */}
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="exampleRadios"
+              id="exampleRadios2"
+              value="option2"
+            ></input>
+            <label class="form-check-label" for="exampleRadios2">
+              Female
+            </label>
+          </div>
+          <form>
+            <label className="mb-2">Hostel Preferences </label>
+            <div class="form-check">
+              <input
+                class="form-check-input mb-3"
+                name="hostelPreference"
+                onChange={(e) => handleCheckbox(e)}
+                type="checkbox"
+                value={"Johar Hall"}
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Johar Hall
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                name="hostelPreference"
+                onChange={(e) => handleCheckbox(e)}
+                type="checkbox"
+                value={"MA Jinnah Hall"}
+                id="flexCheckChecked"
+              />
+              <label class="form-check-label" for="flexCheckChecked">
+                MA Jinnah Hall
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                name="hostelPreference"
+                onChange={(e) => handleCheckbox(e)}
+                type="checkbox"
+                value={"Jupiter Hall"}
+                id="flexCheckChecked"
+              />
+              <label class="form-check-label  mb-3" for="flexCheckChecked">
+                Jupiter Hall
+              </label>
+            </div>
+          </form>
 
           <button
             className="btn btn-primary form-control"

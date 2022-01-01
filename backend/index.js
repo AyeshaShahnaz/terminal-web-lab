@@ -20,3 +20,4 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/hostelApplicants", hostelApplications);
 app.use("/viewApplicants", hostelApplications);
+app.use("/deleteApplication", hostelApplications);

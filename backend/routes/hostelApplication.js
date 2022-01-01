@@ -7,5 +7,8 @@ const router = express.Router();
 router.get("/", getApplications);
 
 router.post("/", createApplication);
+// router.delete("/", deleteApplicantion);
+ 
+
 
 export default router;
